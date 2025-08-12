@@ -195,7 +195,7 @@ export default function Header() {
   };
 
   const mobileMenuButtonStyle = {
-    display: isMobile ? 'flex' : 'none',
+    display: isMobile ? 'none' : 'none',
     padding: '8px',
     background: 'transparent',
     border: 'none',
@@ -208,13 +208,13 @@ export default function Header() {
   const mobileMenuStyle = {
     position: 'fixed',
     top: getValue({
-      xs: '60px', sm: '64px'
-    }),
+      xs: '60px', sm: '64px', md: '68px', lg: '72px', xl: '76px', '2xl': '80px'
+    }), // <-- add all breakpoints here
     left: 0,
     right: 0,
     backgroundColor: 'rgba(10, 10, 10, 0.98)',
     backdropFilter: getValue({
-      xs: 'blur(10px)', sm: 'blur(12px)'
+      xs: 'blur(10px)', sm: 'blur(12px)', md: 'blur(12px)', lg: 'blur(15px)', xl: 'blur(15px)', '2xl': 'blur(20px)'
     }),
     borderTop: '1px solid rgba(255, 255, 255, 0.1)',
     padding: getValue({
