@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion, useInView, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import emailjs from '@emailjs/browser';
+// EmailJS removed - now using FormSubmit (no configuration needed)
 import { useToast } from '../ui/Toast';
 import { useResponsive } from '../../lib/responsive';
 import { 
@@ -112,12 +112,7 @@ export default function ContactSection() {
   const responsive = useResponsive(windowWidth);
   const { isMobile, isTablet, isDesktop, getValue, getStyle } = responsive;
 
-  // Initialize EmailJS
-  useEffect(() => {
-    // You need to replace this with your actual EmailJS public key
-    // Get it from https://dashboard.emailjs.com/admin/account
-    emailjs.init('YOUR_EMAILJS_PUBLIC_KEY'); 
-  }, []);
+  // FormSubmit - No configuration needed!
 
   useEffect(() => {
     setWindowWidth(window.innerWidth);
@@ -153,44 +148,25 @@ export default function ContactSection() {
     setIsSubmitting(true);
     
     try {
-      // You need to replace these with your actual EmailJS credentials
-      const serviceId = 'YOUR_SERVICE_ID'; // Replace with your Gmail service ID
-      const templateId = 'YOUR_TEMPLATE_ID'; // Replace with your template ID
+      // FormSubmit - sends emails directly to your inbox!
+      const formData = new FormData(formRef.current);
       
-      const templateParams = {
-        from_name: formData.name,
-        from_email: formData.email,
-        message: formData.message,
-        to_name: 'Reeturaj Kumar',
-        to_email: 'reeturajvats587@gmail.com',
-        reply_to: formData.email,
-      };
+      const response = await fetch('https://formsubmit.co/reeturajvats587@gmail.com', {
+        method: 'POST',
+        body: formData
+      });
 
-      console.log('Sending email with params:', templateParams);
-      
-      const result = await emailjs.send(serviceId, templateId, templateParams);
-      
-      console.log('Email sent successfully:', result);
-      
-      // Success - show toast and reset form
-      setFormData({ name: '', email: '', message: '' });
-      showToast('Your message has been sent successfully! I\'ll get back to you soon.', 'success');
-      
-    } catch (error) {
-      console.error('Failed to send email:', error);
-      console.error('Error details:', error);
-      
-      // Show specific error message
-      let errorMessage = 'Failed to send message. ';
-      if (error.status === 400) {
-        errorMessage += 'Please check your EmailJS configuration.';
-      } else if (error.status === 401) {
-        errorMessage += 'EmailJS authentication failed.';
+      if (response.ok) {
+        // Success - show toast and reset form
+        setFormData({ name: '', email: '', message: '' });
+        showToast('Your message has been sent successfully! I\'ll get back to you soon.', 'success');
       } else {
-        errorMessage += 'Please try again or contact me directly.';
+        throw new Error('Form submission failed');
       }
       
-      showToast(errorMessage, 'error');
+    } catch (error) {
+      console.error('Failed to send message:', error);
+      showToast('Failed to send message. Please try again or contact me directly at reeturajvats587@gmail.com', 'error');
     } finally {
       setIsSubmitting(false);
     }
@@ -427,6 +403,11 @@ export default function ContactSection() {
             </h3>
 
             <form ref={formRef} onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+              {/* FormSubmit configuration */}
+              <input type="hidden" name="_subject" value="New Portfolio Message!" />
+              <input type="hidden" name="_template" value="table" />
+              <input type="hidden" name="_captcha" value="false" />
+              
               <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }}>
                 <input
                   type="text"
