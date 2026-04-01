@@ -2,8 +2,8 @@ import { motion } from 'framer-motion';
 
 const Hero = () => {
   return (
-    <section className="relative w-full bg-[#fffff] px-6 md:px-12 lg:px-16 xl:px-20 py-8 lg:py-10 overflow-hidden">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-[1.1fr_0.9fr] gap-10 items-center">
+    <section className="relative w-full bg-[#fffff] px-6 md:px-12 lg:px-16 xl:px-20 pt-2 pb-6 lg:pt-2 lg:pb-10 overflow-hidden">
+      <div className="relative z-10 max-w-8xl mx-auto grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-[1.1fr_0.9fr] gap-10 items-center">
         
         {/* LEFT CONTENT */}
         <motion.div 

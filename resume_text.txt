@@ -1,0 +1,95 @@
+REETURAJ KUMAR 
+Full Stack Developer | React.js | Node.js | Next.js | MERN 
+Motivated and detail-oriented Full Stack Developer (2025 Graduate) skilled in React.js, Next.js, Node.js, and MongoDB, with hands-
+on experience developing scalable web applications across LMS, e-commerce, and job portal domains. Proficient in building secure
+REST APIs, implementing modern UI/UX, and deploying production-grade apps using Vercel and Render. Passionate about clean
+architecture, Agile collaboration, and continuous learning to deliver high-quality, maintainable code. 
+reeturajvats587@gmail.com 6299045761 reeturajkumar.vercel.app/ github.com/ReeturajKumar 
+EDUCATION 
+Bachelor of Technology in Computer Science 
+OmDayal Group of Institutions, West Bengal 
+10/2021 - 06/2025,     Uluberia , West Bengal 711316 
+Web Technologies 
+Software Engineering 
+Database Systems 
+Senior Secondary Education 
+Langat Singh College, Muzaffarpur 
+06/2019 - 04/2021,      Muzaffarpur, Bihar 842003 
+PROFESSIONAL EXPERIENCE 
+INTERNSHIP 
+HEXAWARE TECHNOLOGIES LIMITED, MUMBAI 
+03/2025 - 05/2025,     SOFTWARE ENGINEER INTERN 
+Developed an AI-powered e-commerce web app integrating
+PayPal and chatbot automation, reducing manual checkout steps
+by 30%. 
+Enhanced state management and UI responsiveness, improving
+checkout experience. 
+Collaborated with senior engineers to enhance component
+reusability and API integration in a microservices environment. 
+INTERNSHIP & TRAINING 
+VIGOMERGE INC, PUNE 
+09/2024 - 02/2025,     ASSOCIATE ENGINEER INTERN 
+Developed a full-stack appointment booking system using
+modern frameworks. 
+Enhanced state consistency using Redux and ensured 99% API
+response reliability via optimized backend logic. 
+Participated in daily Agile stand-ups and contributed to CI/CD
+pipeline improvements, reducing deployment time by 25%. 
+INTERNSHIP & TRAINING 
+JIO PLATFORMS LIMITED, MUMBAI 
+07/2023 - 10/2023,     SOFTWARE ENGINEER INTERN 
+Developed an AI-powered Expense Tracker web app using
+Next.js, React.js, TypeScript, Express.js, and MongoDB. 
+Integrated AI-based PDF receipt extraction for automated
+expense categorization and analytics. 
+Implemented JWT authentication and automated monthly email
+summaries using Nodemailer. 
+TECHNICAL SKILLS 
+Languages: Java, JavaScript (ES6+), TypeScript, Python 
+Frontend: React.js, Next.js, Redux, Zustand. 
+Backend: Node.js, Express.js, REST APIs, 
+Database: MongoDB, SQL Server, PostgreSQL, Prisma 
+DevOps & Tools: Git, GitHub, CI/CD (Vercel, Render) 
+Methodologies: Agile Development, Scrum, 
+PORTFOLIO PROJECTS 
+LearnNexus — Learning Management System
+(Next.js, TypeScript, Tailwind CSS) 
+https://learnnexus.vercel.app/ 
+Built an LMS platform with course management, student
+tracking, and an admin analytics dashboard. Improved course
+delivery efficiency with dynamic routing and API-driven
+dashboards. 
+HireTrack — Job Portal (Next.js, Prisma,
+PostgreSQL, Clerk, Firebase, ShadCN) 
+https://hiretrack.vercel.app/ 
+Built an AI-powered job platform with AI-generated job
+descriptions, recruiter/admin analytics dashboard, secure
+authentication, automated email workflows, and a seamless
+job application experience for job seekers. 
+Rutu Estate — Real Estate Platform (MERN Stack) 
+https://rutu-estate.onrender.com/ . 
+Built a real estate marketplace for property listings and
+secure logins via Google OAuth. Designed a responsive UI
+with Tailwind CSS and optimized MongoDB queries for
+performance. 
+TuneFlow — Music Streaming App (React,
+TypeScript, Zustand, MongoDB) 
+https://tuneflow-4vd5.onrender.com/ . 
+Created a social music streaming app featuring real-time chat
+and admin analytics. Used Clerk authentication, WebSockets,
+and MongoDB aggregation for live user stats. 
+ADDITIONAL HIGHLIGHTS 
+Built and deployed 4+ full-stack individual projects
+across MERN and Next.js ecosystems. 
+Proficient in REST API development,
+authentication & authorization (JWT, OAuth) 
+LANGUAGES 
+ENGLISH 
+Full Professional Proficiency 
+HINDI 
+Native or Bilingual Proficiency 
+Relevant Coursework 
+Key Achievements 
+Key Achievements 
+Key Achievements 
+----------------Page (0) Break----------------

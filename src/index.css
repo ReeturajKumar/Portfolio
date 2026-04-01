@@ -42,4 +42,12 @@
   .hero-heading {
     @apply text-[100px] md:text-[160px] lg:text-[200px] font-black leading-[0.72] tracking-tighter text-black lowercase;
   }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
