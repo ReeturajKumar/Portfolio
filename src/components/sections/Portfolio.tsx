@@ -212,11 +212,11 @@ const Portfolio = () => {
   ];
 
   return (
-    <section ref={targetRef} id="portfolio" className="relative h-[280vh] md:h-[250vh] bg-transparent text-black">
-      <div className="sticky top-0 h-screen md:h-[100vh] flex flex-col items-center justify-start overflow-hidden pt-0">
+    <section ref={targetRef} id="portfolio" className="relative h-[200vh] md:h-[220vh] lg:h-[280vh] bg-transparent text-black">
+      <div className="sticky top-0 h-screen md:h-screen flex flex-col items-center justify-start overflow-hidden pt-0">
         
         {/* Sticky Section Header */}
-        <div className="relative z-50 mb-2 h-fit pointer-events-none px-6 md:px-12 lg:px-20 w-full text-left pt-6 md:pt-14">
+        <div className="relative z-50 h-fit pointer-events-none px-6 md:px-12 lg:px-20 w-full text-left pt-6 md:pt-10 lg:pt-14">
            <motion.div 
              initial={{ opacity: 0, y: 30 }}
              whileInView={{ opacity: 1, y: 0 }}
@@ -224,17 +224,17 @@ const Portfolio = () => {
              className="pointer-events-auto"
            >
              <p className="text-[8px] md:text-[9px] font-black uppercase tracking-[0.4em] md:tracking-[0.5em] text-black/30 mb-2">Crafting Modern Experiences</p>
-             <h2 className="text-[28px] mb-6 xs:text-[34px] sm:text-[38px] md:text-[54px] font-black tracking-tighter leading-none uppercase text-black">
+             <h2 className="text-[28px] mb-1 xs:text-[34px] sm:text-[38px] md:text-[54px] font-black tracking-tighter leading-none uppercase text-black">
                Venture <span className="font-['Cormorant_Garamond'] italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] via-[#FDBA74] to-[#EB3678] tracking-tight">Showcase</span>
              </h2>
            </motion.div>
         </div>
 
         {/* Horizontal Track Container */}
-        <div className="pt-1 flex h-full items-center relative w-full">
+        <div className="flex-1 flex items-start relative w-full pt-4 md:pt-12">
           <motion.div 
             style={{ x }} 
-            className="flex gap-6 md:gap-12 px-5 md:px-12 lg:px-20 h-auto items-center"
+            className="flex gap-6 md:gap-12 px-5 md:px-12 lg:px-20 h-auto items-start"
           >
             {projects.map((project, i) => (
               <ProjectCard key={project.id} project={project} index={i} />
