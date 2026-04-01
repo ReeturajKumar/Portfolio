@@ -134,14 +134,20 @@ const About = () => {
 
             <div className="relative mt-8 md:mt-auto mb-8 md:mb-10 w-full overflow-hidden">
               <div ref={scrollRef} className="flex gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-4 text-white scroll-smooth cursor-grab active:cursor-grabbing">
-                {['/Reeturaj2.webp', '/ReeturajAbout.webp', '/Reeturaj2.webp'].map((src, i) => (
+                {['/2.jpg', '/Reeturaj.png', '/1.jpg'].map((src, i) => (
                   <motion.div 
                     key={i} 
                     whileHover={{ scale: 1.05, rotate: 0, zIndex: 50 }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
                     className={`flex-none w-[75%] md:w-[65%] snap-center rounded-[1.5rem] overflow-hidden border border-white/10 aspect-[4/5] relative group/photo ${i === 0 ? '-rotate-3 mt-4 ml-6' : i === 1 ? 'rotate-0 mt-0' : 'rotate-3 mt-4 mr-6'}`}
                   >
-                    <img src={src} alt="Photo" className="w-full h-full object-cover grayscale group-hover/photo:grayscale-0 transition-all duration-700" />
+                    <img 
+                      src={src} 
+                      alt="Photo" 
+                      className={`w-full h-full object-cover transition-all duration-700 ${
+                        i === 0 ? 'object-[center_5%]' : ''
+                      }`} 
+                    />
                   </motion.div>
                 ))}
               </div>
