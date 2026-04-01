@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Github, Linkedin, Twitter, ArrowUpRight, MapPin, Navigation2 } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 
 const StarBackground = () => (
   <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-35">
@@ -312,8 +311,8 @@ const About = () => {
                </p>
             </div>
 
-            <Link 
-              to="#skills"
+            <a
+              href="#skills"
               onClick={(e) => {
                 e.preventDefault();
                 const element = document.getElementById('skills');
@@ -327,7 +326,7 @@ const About = () => {
               className="w-full bg-white text-black py-4.5 rounded-full font-black text-[11px] uppercase tracking-[0.25em] flex items-center justify-center gap-3 hover:bg-[#e0e0e0] transition-all hover:scale-[0.98] mt-8"
             >
               CONNECT NOW <ArrowUpRight size={14} className="stroke-[3]" />
-            </Link>
+            </a>
           </motion.div>
         </motion.div>
 

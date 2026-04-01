@@ -33,9 +33,9 @@ const ProjectBanner = () => {
   };
 
   return (
-    <div className="hidden md:block relative pt-6 pb-12 mb-4 md:-mt-10 bg-transparent overflow-hidden select-none">
+    <div className="hidden md:block relative pt-10 pb-10 mt-5 md:mt-10 bg-transparent overflow-hidden select-none">
       {/* Crossing Background Marquee (Rising Slant) - Light Theme */}
-      <div className="absolute top-1/2 left-0 w-[140%] -translate-y-1/2 rotate-[4deg] -translate-x-[20%] z-0 bg-black/[0.03] backdrop-blur-[2px] py-3 md:py-4 border-y border-black/5">
+      <div className="absolute top-1/2 left-0 w-[140%] -translate-y-1/2 rotate-[4deg] -translate-x-[20%] z-0 bg-black/[0.03] py-3 md:py-4 border-y border-black/5">
         <div className="flex whitespace-nowrap overflow-hidden">
           <motion.div 
             variants={marqueeVariants}
@@ -55,7 +55,7 @@ const ProjectBanner = () => {
       </div>
       
       {/* Main Foreground Marquee (Falling Slant) - Semi-Transparent Black */}
-      <div className="relative z-10 -rotate-[3deg] bg-black/90 backdrop-blur-sm py-4 md:py-5 shadow-xl skew-x-[-1deg] scale-[1.08] md:scale-105 border-y border-white/5">
+      <div className="relative z-10 -rotate-[3deg] bg-black/90 py-4 md:py-5 skew-x-[-1deg] scale-[1.08] md:scale-105 border-y border-white/5">
         <div className="flex whitespace-nowrap overflow-hidden">
           <motion.div 
             variants={marqueeVariants}

@@ -1,6 +1,5 @@
 import { ArrowUpRight, Github, Linkedin} from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -51,8 +50,8 @@ const Footer = () => {
             </div>
 
             {/* Scroll to Top */}
-            <Link 
-              to="#home"
+            <a
+              href="#home"
               onClick={(e) => {
                 e.preventDefault();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -63,7 +62,7 @@ const Footer = () => {
               <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-white border border-black/[0.05] flex items-center justify-center group-hover:bg-black group-hover:text-white transition-all duration-500 shadow-sm group-hover:shadow-md">
                 <ArrowUpRight size={14} className="group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
               </div>
-            </Link>
+            </a>
           </div>
 
         </div>

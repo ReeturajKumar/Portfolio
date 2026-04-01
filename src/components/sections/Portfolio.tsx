@@ -3,10 +3,10 @@ import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'fram
 import { Star, Eye } from 'lucide-react';
 
 // Import images
-import learnnexusImg from '../../assets/projects/learnnexus.png';
-import hiretrackImg from '../../assets/projects/hiretrack.png';
-import tuneflowImg from '../../assets/projects/tuneflow.png';
-import designStudioImg from '../../assets/projects/design_studio.png';
+import learnnexusImg from '../../assets/projects/learnnexus.webp';
+import hiretrackImg from '../../assets/projects/hiretrack.webp';
+import tuneflowImg from '../../assets/projects/tuneflow.webp';
+import designStudioImg from '../../assets/projects/design_studio.webp';
 
 const ProjectCard = ({ project, index }: { project: any, index: number }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -150,7 +150,7 @@ const Portfolio = () => {
 
   // Calculate transformation based on project count (4 projects)
   // More translation needed on mobile as container is relatively wider
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-78%"]);
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-66%"]);
 
   const projects = [
     {
@@ -212,7 +212,7 @@ const Portfolio = () => {
   ];
 
   return (
-    <section ref={targetRef} id="portfolio" className="relative h-[350vh] md:h-[300vh] bg-transparent text-black">
+    <section ref={targetRef} id="portfolio" className="relative h-[280vh] md:h-[250vh] bg-transparent text-black">
       <div className="sticky top-0 h-screen md:h-[100vh] flex flex-col items-center justify-start overflow-hidden pt-0">
         
         {/* Sticky Section Header */}
@@ -224,17 +224,17 @@ const Portfolio = () => {
              className="pointer-events-auto"
            >
              <p className="text-[8px] md:text-[9px] font-black uppercase tracking-[0.4em] md:tracking-[0.5em] text-black/30 mb-2">Crafting Modern Experiences</p>
-             <h2 className="text-[28px] xs:text-[34px] sm:text-[38px] md:text-[54px] font-black tracking-tighter leading-none uppercase text-black">
+             <h2 className="text-[28px] mb-6 xs:text-[34px] sm:text-[38px] md:text-[54px] font-black tracking-tighter leading-none uppercase text-black">
                Venture <span className="font-['Cormorant_Garamond'] italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] via-[#FDBA74] to-[#EB3678] tracking-tight">Showcase</span>
              </h2>
            </motion.div>
         </div>
 
         {/* Horizontal Track Container */}
-        <div className="flex h-full items-center relative w-full -mt-6 md:-mt-16">
+        <div className="pt-1 flex h-full items-center relative w-full">
           <motion.div 
             style={{ x }} 
-            className="flex gap-6 md:gap-12 px-6 md:px-12 lg:px-20 h-auto items-center"
+            className="flex gap-6 md:gap-12 px-5 md:px-12 lg:px-20 h-auto items-center"
           >
             {projects.map((project, i) => (
               <ProjectCard key={project.id} project={project} index={i} />

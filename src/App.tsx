@@ -1,13 +1,15 @@
+import { lazy, Suspense } from 'react';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Hero from './components/sections/Hero';
-import About from './components/sections/About';
-import GlobalSection from './components/sections/GlobalSection';
-import Portfolio from './components/sections/Portfolio';
-import Journey from './components/sections/Journey';
-import Skills from './components/sections/Skills';
-import ProjectBanner from './components/sections/ProjectBanner';
-import BuildingDaily from './components/sections/BuildingDaily';
+
+const About = lazy(() => import('./components/sections/About'));
+const GlobalSection = lazy(() => import('./components/sections/GlobalSection'));
+const Portfolio = lazy(() => import('./components/sections/Portfolio'));
+const Journey = lazy(() => import('./components/sections/Journey'));
+const Skills = lazy(() => import('./components/sections/Skills'));
+const ProjectBanner = lazy(() => import('./components/sections/ProjectBanner'));
+const BuildingDaily = lazy(() => import('./components/sections/BuildingDaily'));
 
 function App() {
   return (
@@ -15,19 +17,19 @@ function App() {
       <Navbar />
       <main>
         <section id="home"><Hero /></section>
-        <section id="about">
-          <About />
-          <GlobalSection />
-        </section>
-        <section id="portfolio">
+        <Suspense fallback={null}>
+          <section id="about">
+            <About />
+            <GlobalSection />
+          </section>
           <Portfolio />
           <ProjectBanner />
-        </section>
-        <section id="journey">
-          <Journey />
-          <BuildingDaily />
-        </section>
-        <section id="contact"><Skills /></section>
+          <section id="journey">
+            <Journey />
+            <BuildingDaily />
+          </section>
+          <section id="contact"><Skills /></section>
+        </Suspense>
       </main>
       <Footer />
     </div>

@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -35,15 +34,15 @@ const Navbar = () => {
     { label: 'Contact', id: 'contact' }
   ];
 
-  const MotionLink = motion(Link);
+  const MotionAnchor = motion.a;
 
   return (
     <>
       <nav className="w-full bg-transparent backdrop-blur-2xl px-4 md:px-12 lg:px-20 py-3.5 flex items-center sticky top-0 z-[100] h-16">
         {/* Left: Logo */}
         <div className="flex-1 flex items-center justify-start">
-          <Link 
-            to="#home"
+          <a
+            href="#home"
             onClick={(e) => {
               e.preventDefault();
               scrollToSection('home');
@@ -55,15 +54,15 @@ const Navbar = () => {
               <path d="M18 6C18 6 25 6 25 14C25 22 18 22 18 22V6Z" fill="black"/>
               <path d="M26 6C26 6 33 6 33 14C33 22 26 22 26 22V6Z" fill="black"/>
             </svg>
-          </Link>
+          </a>
         </div>
 
         {/* Center: Desktop Navigation Links */}
         <div className="hidden lg:flex items-center justify-center gap-8">
           {navLinks.map((link) => (
-            <Link
+            <a
               key={link.label}
-              to={`#${link.id}`}
+              href={`#${link.id}`}
               onClick={(e) => {
                 e.preventDefault();
                 scrollToSection(link.id);
@@ -72,7 +71,7 @@ const Navbar = () => {
             >
               {link.label}
               <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-black transition-all duration-300 group-hover:w-full"></span>
-            </Link>
+            </a>
           ))}
         </div>
 
@@ -128,12 +127,12 @@ const Navbar = () => {
           >
             <div className="space-y-8">
               {navLinks.map((link, idx) => (
-                <MotionLink
+                <MotionAnchor
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: idx * 0.1 }}
                   key={link.label}
-                  to={`#${link.id}`}
+                  href={`#${link.id}`}
                   onClick={(e) => {
                     e.preventDefault();
                     scrollToSection(link.id);
@@ -141,7 +140,7 @@ const Navbar = () => {
                   className="block text-4xl font-black uppercase tracking-tighter text-black/20 hover:text-black transition-all text-left italic"
                 >
                   {link.label}
-                </MotionLink>
+                </MotionAnchor>
               ))}
             </div>
 
