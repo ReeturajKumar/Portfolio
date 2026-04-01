@@ -150,7 +150,7 @@ const Portfolio = () => {
 
   // Calculate transformation based on project count (4 projects)
   // More translation needed on mobile as container is relatively wider
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-66%"]);
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-72%"]);
 
   const projects = [
     {
@@ -212,8 +212,8 @@ const Portfolio = () => {
   ];
 
   return (
-    <section ref={targetRef} id="portfolio" className="relative h-[200vh] md:h-[220vh] lg:h-[280vh] bg-transparent text-black">
-      <div className="sticky top-0 h-screen md:h-screen flex flex-col items-center justify-start overflow-hidden pt-0">
+    <section ref={targetRef} id="portfolio" className="relative h-[160vh] md:h-[180vh] lg:h-[280vh] bg-transparent text-black">
+      <div className="sticky top-0 h-fit min-h-screen md:min-h-screen flex flex-col items-center justify-start overflow-hidden pt-0">
         
         {/* Sticky Section Header */}
         <div className="relative z-50 h-fit pointer-events-none px-6 md:px-12 lg:px-20 w-full text-left pt-6 md:pt-10 lg:pt-14">
@@ -231,7 +231,7 @@ const Portfolio = () => {
         </div>
 
         {/* Horizontal Track Container */}
-        <div className="flex-1 flex items-start relative w-full pt-4 md:pt-12">
+        <div className="flex-1 flex items-start relative w-full pt-4 md:pt-12 pb-10">
           <motion.div 
             style={{ x }} 
             className="flex gap-6 md:gap-12 px-5 md:px-12 lg:px-20 h-auto items-start"
