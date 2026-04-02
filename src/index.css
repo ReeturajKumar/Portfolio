@@ -51,6 +51,33 @@
     scrollbar-width: none;
   }
 
+  @keyframes lyrics-gradient-flow {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 200% 50%;
+    }
+  }
+
+  .lyrics-gradient-text {
+    background-image: linear-gradient(
+      90deg,
+      #ff3bff,
+      #f472b6,
+      #ec4899,
+      #ff6b00,
+      #fb923c,
+      #ff3bff,
+      #f472b6
+    );
+    background-size: 250% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: lyrics-gradient-flow 6s linear infinite;
+  }
+
   @keyframes globe-rotation {
     from { background-position: 0 0; }
     to { background-position: 48px 0; }
@@ -76,6 +103,21 @@
   @keyframes border-glow {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
+  }
+
+  @keyframes dot-grid-drift {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 24px 24px;
+    }
+  }
+
+  .dot-grid-layer {
+    background-image: radial-gradient(circle at 1px 1px, #ffffff 1px, transparent 0);
+    background-size: 24px 24px;
+    animation: dot-grid-drift 9s linear infinite;
   }
 
   .glow-border {
@@ -112,5 +154,37 @@
     height: 100%;
     border-radius: inherit;
     background: #000;
+  }
+
+  @keyframes skills-marquee-l {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes skills-marquee-r {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  .skills-marquee-track-l {
+    display: flex;
+    width: max-content;
+    gap: 0.625rem;
+    animation: skills-marquee-l 42s linear infinite;
+  }
+
+  .skills-marquee-track-r {
+    display: flex;
+    width: max-content;
+    gap: 0.625rem;
+    animation: skills-marquee-r 48s linear infinite;
   }
 }

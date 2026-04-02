@@ -1,10 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
-import { Github, Linkedin, ArrowUpRight, MapPin, Globe } from 'lucide-react';
+import { Github, ArrowUpRight, MapPin, Globe } from 'lucide-react';
 import { motion } from "motion/react";
 import { FADE_UP, TRANSITIONS, STAGGER_CONTAINER } from "../../constants/motion";
 import StarfieldBackground from '../effects/StarfieldBackground';
-
-
 
 const About = () => {
   const [time, setTime] = useState(new Date());
@@ -79,30 +77,21 @@ const About = () => {
 
             <motion.div variants={FADE_UP} className="pt-6 border-t border-white/3 z-10 w-full mt-auto">
               <div className="flex flex-col gap-3">
-                <div className="grid grid-cols-2 gap-3">
+                <div className="w-full">
                   <a 
                     href="https://www.linkedin.com/in/reeturaj-kumar-372963238/" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="glow-border rounded-xl group/social"
+                    className="group/social relative p-[1.5px] rounded-xl flex items-center justify-center overflow-hidden transition-all duration-500"
                   >
-                    <div className="glow-border-content !bg-black px-8 py-3 rounded-xl flex items-center justify-center gap-2">
-                       <Linkedin size={16} className="text-indigo-400 group-hover/social:text-indigo-400 transition-colors" />
-                      <span className="text-[11px] font-black text-white/70 group-hover/social:text-white transition-colors tracking-tight uppercase">LinkedIn</span>
+                    {/* Animated border glow (visible only on hover) */}
+                    <div className="absolute inset-0 opacity-0 group-hover/social:opacity-100 transition-opacity duration-500">
+                      <div className="absolute inset-[-100%] bg-[conic-gradient(from_0deg,transparent_260deg,#ffb433_290deg,#ff3399_320deg,#9933ff_340deg,#3366ff_360deg)] animate-[border-glow_3s_linear_infinite]" />
                     </div>
-                  </a>
-                  
-                  <a 
-                    href="https://twitter.com/yourusername" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="glow-border rounded-xl group/social"
-                  >
-                    <div className="glow-border-content !bg-[#131313] px-8 py-3 rounded-xl flex items-center justify-center gap-2">
-                       <svg viewBox="0 0 24 24" className="w-4 h-4 fill-white/50 group-hover/social:fill-white transition-colors" aria-hidden="true">
-                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                      </svg>
-                      <span className="text-[11px] font-black text-white/70 group-hover/social:text-white transition-colors tracking-tight uppercase">Twitter</span>
+
+                    <div className="relative z-10 w-full bg-white group-hover/social:bg-black px-8 py-3 rounded-[calc(0.75rem-1px)] flex items-center justify-center gap-2 transition-all duration-500">
+                      <span className="text-[11px] font-black text-black group-hover/social:text-white transition-colors tracking-tight uppercase">LinkedIn</span>
+                      <ArrowUpRight size={14} className="text-white opacity-0 -translate-x-2 group-hover/social:opacity-100 group-hover/social:translate-x-0 transition-all duration-500" />
                     </div>
                   </a>
                 </div>
@@ -164,24 +153,23 @@ const About = () => {
               </div>
 
               <motion.div variants={FADE_UP} className="lg:col-span-4 flex flex-col items-center md:items-end text-center md:text-right pt-4 md:pt-6">
-                <div className="grid grid-cols-2 gap-3 mb-8 md:mb-12 w-fit">
-                  {['Motion', 'Type', 'Feedback', 'Craft'].map((tag, i) => (
+                <div className="grid grid-cols-2 gap-3 mb-8 md:mb-12 w-full">
+                  {['Motion', 'Type', 'Flow', 'Craft'].map((tag, i) => (
                     <div 
                       key={tag} 
-                      className="glow-border rounded-full w-full"
+                      className="relative overflow-hidden group/chip px-4 md:px-8 py-2 rounded-full border border-white/10 bg-white/5 flex items-center justify-center cursor-default transition-all duration-300 w-full"
                     >
-                      <div className="glow-border-content !bg-[#131313] px-10 md:px-11 py-1.5 rounded-full flex items-center justify-center">
-                         <span className={`text-[9px] md:text-[10px] font-black tracking-[0.15em] uppercase whitespace-nowrap cursor-default ${
-                           i === 0 ? 'text-indigo-400' : 'text-white/40'
-                         }`}>
-                           {tag}
-                         </span>
-                      </div>
+                       <div className="absolute inset-0 bg-black translate-y-[101%] group-hover/chip:translate-y-0 transition-transform duration-300 pointer-events-none" />
+                       <span className={`relative z-10 text-[9px] md:text-[10px] font-black tracking-[0.15em] uppercase whitespace-nowrap group-hover/chip:text-white transition-colors duration-300 ${
+                         i === 0 ? 'text-indigo-400' : 'text-white/40'
+                       }`}>
+                         {tag}
+                       </span>
                     </div>
                   ))}
                 </div>
                 
-                <div className="max-w-[200px] md:max-w-[180px] cursor-default">
+                <div className="max-w-[240px] md:max-w-[220px] cursor-default">
                   <h3 className="text-[14px] md:text-[16px] font-black text-white/90 mb-2 tracking-tighter uppercase">Micro-interactions</h3>
                   <p className="text-[10px] md:text-[11px] font-medium text-white/40 leading-relaxed uppercase tracking-wider">
                      Subtle movement that confirms intent — never distracting.
@@ -244,7 +232,6 @@ const About = () => {
                 SOMETHING <br />
                 <span className="font-['Cormorant_Garamond'] italic font-normal text-white/50 tracking-tight text-[32px] lowercase block mt-2">that actually works.</span>
               </h2>
-              <div className="w-full h-px bg-white/5 my-8"></div>
             </motion.div>
 
             <motion.div variants={FADE_UP} className="mt-auto mb-2">

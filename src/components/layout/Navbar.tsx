@@ -1,8 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const currentDate = new Date().toLocaleDateString('en-GB', {
     day: '2-digit',
@@ -35,7 +44,11 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="w-full bg-transparent backdrop-blur-2xl px-4 md:px-12 lg:px-20 py-3.5 flex items-center sticky top-0 z-100 h-16">
+      <nav className={`w-full transition-all duration-500 px-4 md:px-12 lg:px-20 py-3.5 flex items-center sticky top-0 z-100 h-16 ${
+        isScrolled 
+          ? 'bg-white/80 backdrop-blur-xl' 
+          : 'bg-transparent backdrop-blur-md'
+      }`}>
         <div className="flex-1 flex items-center justify-start">
           <a
             href="#home"
@@ -85,11 +98,15 @@ const Navbar = () => {
           </div>
           
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 md:w-9 md:h-9 overflow-hidden rounded-full border border-black/5 flex items-center justify-center bg-black/5 shrink-0">
-              <img 
-                src="/Navbar.png" 
+            <div className="relative h-8 w-8 shrink-0 overflow-hidden rounded-full border border-black/10 bg-black shadow-sm ring-1 ring-black/5 md:h-9 md:w-9">
+              <img
+                src="/Navbar.png"
                 alt="Reeturaj Kumar"
-                className="w-full h-full object-cover grayscale hover:grayscale-0"
+                className="h-full w-full object-cover object-[center_18%] scale-[1.08]"
+                width={36}
+                height={36}
+                loading="eager"
+                decoding="async"
               />
             </div>
 

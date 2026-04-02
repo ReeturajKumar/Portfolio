@@ -3,15 +3,15 @@ import StarfieldBackground from '../effects/StarfieldBackground';
 import { motion } from 'motion/react';
 import { FADE_UP, TRANSITIONS, STAGGER_CONTAINER } from "../../constants/motion";
 
-const SkillPill = ({ name, slug }: { name: string; slug: string }) => (
+const SkillPill = ({ name, slug, iconUrl }: { name: string; slug: string; iconUrl?: string }) => (
   <motion.div 
     variants={FADE_UP}
-    className="flex items-center gap-2 px-3.5 py-2 bg-white/4 border border-white/10 rounded-full group shrink-0 hover:border-white/20 transform-gpu cursor-default hover:bg-white/8"
+    className="flex items-center gap-2 px-3.5 py-2 bg-white/4 border border-white/10 rounded-full group shrink-0 hover:border-white/20 transform-gpu cursor-default hover:bg-white/8 transition-all duration-300"
   >
       <img 
-        src={`https://cdn.simpleicons.org/${slug}/white`} 
+        src={iconUrl || `https://cdn.simpleicons.org/${slug}`} 
         alt={name}
-        className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100"
+        className="w-3.5 h-3.5 opacity-80 group-hover:opacity-100 transition-transform duration-300 group-hover:scale-110 object-contain"
       />
       <span className="text-[9px] font-black text-white/80 tracking-tight uppercase whitespace-nowrap font-['Outfit']">{name}</span>
   </motion.div>
@@ -30,29 +30,23 @@ const GlobalSection = () => {
     { name: 'TypeScript', slug: 'typescript' },
     { name: 'Tailwind CSS', slug: 'tailwindcss' },
     { name: 'Motion', slug: 'framer' },
-    { name: 'Sanity', slug: 'sanity' },
-    { name: 'Contentful', slug: 'contentful' },
     { name: 'NodeJS', slug: 'nodedotjs' },
     { name: 'ExpressJS', slug: 'express' },
     { name: 'PostgreSQL', slug: 'postgresql' },
     { name: 'MongoDB', slug: 'mongodb' },
     { name: 'Prisma', slug: 'prisma' },
-    { name: 'Zustand', slug: 'react' },
     { name: 'Zod', slug: 'zod' },
-    { name: 'pnpm', slug: 'pnpm' },
-    { name: 'Bun', slug: 'bun' },
     { name: 'Git', slug: 'git' },
     { name: 'GitHub', slug: 'github' },
     { name: 'Vercel', slug: 'vercel' },
-    { name: 'AWS', slug: 'amazonaws' },
+    { name: 'AWS', slug: 'amazonwebservices', iconUrl: 'https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/dark/aws-color.png' },
     { name: 'Docker', slug: 'docker' },
     { name: 'Expo', slug: 'expo' },
     { name: 'Clerk', slug: 'clerk' },
-    { name: 'Linux', slug: 'linux' },
   ];
 
   return (
-    <section className="w-full bg-transparent pb-10 px-4 md:px-12 lg:px-20 overflow-x-clip flex flex-col xl:flex-row gap-6 items-start mt-2 relative">
+    <section className="w-full bg-transparent pb-10 px-4 md:px-12 lg:px-20 overflow-x-clip flex flex-col xl:flex-row gap-6 lg:gap-10 items-center xl:items-stretch mt-2 relative">
       <motion.div 
         variants={FADE_UP}
         initial="initial"
@@ -135,10 +129,10 @@ const GlobalSection = () => {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] md:w-[420px] h-[320px] md:h-[420px] opacity-8 pointer-events-none group-hover/skills:opacity-15 transform-gpu">
              <div className="w-full h-full animate-[spin_18s_linear_infinite]">
                 <img 
-                  src="/chrome_sculpture.png" 
-                  alt="Sculpture" 
-                  className="w-full h-full object-contain"
-                  style={{ filter: 'drop-shadow(0 0 20px rgba(255, 255, 255, 0.2)) brightness(1.2)' }}
+                   src="/chrome_sculpture.png" 
+                   alt="Sculpture" 
+                   className="w-full h-full object-contain"
+                   style={{ filter: 'drop-shadow(0 0 20px rgba(255, 255, 255, 0.2)) brightness(1.2)' }}
                 />
              </div>
           </div>
