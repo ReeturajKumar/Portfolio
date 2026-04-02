@@ -28,15 +28,15 @@
 
 @layer utilities {
   .nav-link {
-    @apply text-[13px] font-bold text-brand-black hover:text-brand-gray transition-colors duration-200 uppercase tracking-tight;
+    @apply text-[13px] font-bold text-brand-black hover:text-brand-gray uppercase tracking-tight;
   }
 
   .circle-icon {
-    @apply w-11 h-11 rounded-full border border-black/10 flex items-center justify-center text-[11px] font-bold hover:bg-black hover:text-white transition-all duration-300 uppercase;
+    @apply w-11 h-11 rounded-full border border-black/10 flex items-center justify-center text-[11px] font-bold hover:bg-black hover:text-white uppercase;
   }
 
   .text-stat {
-    @apply text-[52px] md:text-[64px] font-display font-black italic tracking-tighter leading-[1];
+    @apply text-[52px] md:text-[64px] font-display font-black italic tracking-tighter leading-none;
   }
 
   .hero-heading {
@@ -49,5 +49,68 @@
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+
+  @keyframes globe-rotation {
+    from { background-position: 0 0; }
+    to { background-position: 48px 0; }
+  }
+
+  @keyframes star-shift {
+    from { transform: translate(0, 0); }
+    to { transform: translate(-100px, -100px); }
+  }
+
+  .starfield-layer-a {
+    background-image: radial-gradient(circle, white 1.6px, transparent 1.6px);
+    background-size: 50px 50px;
+    animation: star-shift 15s linear infinite;
+  }
+
+  .starfield-layer-b {
+    background-image: radial-gradient(circle, white 1.2px, transparent 1.2px);
+    background-size: 90px 90px;
+    background-position: 25px 25px;
+    animation: star-shift 30s linear infinite reverse;
+  }
+  @keyframes border-glow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .glow-border {
+    position: relative;
+    padding: 1.5px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .glow-border::before {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      transparent 260deg,
+      #ffb433 290deg,
+      #ff3399 320deg,
+      #9933ff 340deg,
+      #3366ff 360deg
+    );
+    animation: border-glow 3s linear infinite;
+  }
+
+  .glow-border-content {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background: #000;
   }
 }

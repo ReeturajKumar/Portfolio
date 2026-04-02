@@ -1,146 +1,104 @@
-import { useRef, useState } from 'react';
-import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
 import { Star, Eye } from 'lucide-react';
+import { motion } from 'motion/react';
+import { FADE_UP, TRANSITIONS, STAGGER_CONTAINER } from "../../constants/motion";
 
-// Import images
 import learnnexusImg from '../../assets/projects/learnnexus.webp';
 import hiretrackImg from '../../assets/projects/hiretrack.webp';
 import tuneflowImg from '../../assets/projects/tuneflow.webp';
 import designStudioImg from '../../assets/projects/design_studio.webp';
 
-const ProjectCard = ({ project, index }: { project: any, index: number }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-  
-  // Motion values for cursor following
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
+type Project = {
+  id: string;
+  title: string;
+  description: string;
+  features: string[];
+  stack: string[];
+  mockups: { mobile1: string; mobile2: string; desktop: string };
+  color: string;
+  link: string;
+};
 
-  // Smooth springs for cursor follow
-  const springX = useSpring(mouseX, { stiffness: 150, damping: 20 });
-  const springY = useSpring(mouseY, { stiffness: 150, damping: 20 });
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    mouseX.set(e.clientX - rect.left);
-    mouseY.set(e.clientY - rect.top);
-  };
-
-  const isFirstCard = index === 0;
-
+const ProjectCard = ({ project }: { project: Project }) => {
   return (
     <motion.div 
-      ref={containerRef}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      initial={{ 
-        opacity: 0, 
-        x: isFirstCard ? -50 : 0, 
-        y: !isFirstCard ? 50 : 0 
-      }}
-      whileInView={{ 
-        opacity: 1, 
-        x: 0, 
-        y: 0 
-      }}
-      viewport={{ once: false, amount: 0.15 }}
-      transition={{ 
-        duration: 1.2, 
-        ease: [0.23, 1, 0.32, 1],
-        delay: index * 0.1 
-      }}
-      className="w-[90vw] sm:w-[85vw] md:w-[75vw] lg:w-[1000px] flex-shrink-0 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-16 items-center bg-white py-6 md:py-10 rounded-[2rem] border border-black/5 relative group lg:cursor-none overflow-hidden h-auto lg:h-auto"
+      variants={FADE_UP}
+      initial="initial"
+      whileInView="animate"
+      viewport={{ once: false, amount: 0.1 }}
+      transition={TRANSITIONS.smooth}
+      className="w-[90vw] sm:w-[85vw] md:w-[75vw] lg:w-[1000px] shrink-0 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-16 items-center bg-white py-6 md:py-8 rounded-4xl border border-black/5 relative group overflow-hidden h-auto lg:h-[420px]"
     >
-      <a href={project.link} target="_blank" rel="noopener noreferrer" className="absolute inset-0 z-40 block lg:cursor-none" />
-      
-      {/* High-Fidelity Cursor Badge (Desktop Only) */}
+      <a href={project.link} target="_blank" rel="noopener noreferrer" className="absolute inset-0 z-40 block" aria-label={`Open ${project.title}`} />
+
       <motion.div 
-         style={{ 
-           left: springX, 
-           top: springY,
-           opacity: isHovered ? 1 : 0,
-           scale: isHovered ? 1 : 0.5,
-           x: "-50%",
-           y: "-50%"
-         }}
-         className="hidden lg:flex absolute z-50 pointer-events-none w-24 h-24 items-center justify-center pointer-events-none"
+        variants={STAGGER_CONTAINER(0.1, 0.1)}
+        className="contents"
       >
+        <div className="hidden lg:flex absolute z-30 pointer-events-none w-24 h-24 items-center justify-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100">
           <div className="absolute inset-0 bg-black rounded-full shadow-2xl" />
-          <motion.svg 
-            animate={{ rotate: 360 }}
-            transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-            viewBox="0 0 100 100" 
-            className="absolute inset-0 w-full h-full scale-[0.88] drop-shadow-lg"
-          >
-             <defs>
-                <path id="circlePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" />
-             </defs>
-             <text className="text-[9.5px] font-black uppercase tracking-[0.25em] fill-white">
-                <textPath href="#circlePath">
-                   Visit Project • Visit • Visit •
-                </textPath>
-             </text>
-          </motion.svg>
+          <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full scale-[0.88] drop-shadow-lg">
+            <defs>
+              <path id={`circlePath-${project.id}`} d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" />
+            </defs>
+            <text className="text-[9.5px] font-black uppercase tracking-[0.25em] fill-white">
+              <textPath href={`#circlePath-${project.id}`}>
+                Visit Project • Visit • Visit •
+              </textPath>
+            </text>
+          </svg>
           <div className="relative z-10 w-11 h-11 bg-white rounded-full flex items-center justify-center shadow-inner">
-             <Eye size={20} className="text-black" />
+            <Eye size={20} className="text-black" />
           </div>
+        </div>
+
+        <div className="lg:col-span-5 flex flex-col pt-0 px-6 sm:px-10 relative z-10">
+          <motion.div variants={FADE_UP} className="flex items-center gap-3 md:gap-4 mb-2">
+            <div className="w-4 md:w-6 h-[2px] bg-[#FF6B00]" />
+            <h3 className="text-[18px] xs:text-[22px] md:text-[28px] font-black tracking-tighter text-black">{project.title}</h3>
+          </motion.div>
+          <motion.p variants={FADE_UP} className="text-[10px] md:text-[13px] font-medium text-black/40 leading-relaxed mt-1 md:mt-2 line-clamp-3 md:line-clamp-none">
+            {project.description}
+          </motion.p>
+          <motion.div variants={STAGGER_CONTAINER(0.05, 0.2)} className="hidden md:flex flex-col gap-2 md:gap-3 mt-4 md:mt-5">
+            {project.features.slice(0, 3).map((feature, i) => (
+              <motion.div key={i} variants={FADE_UP} className="flex gap-3 md:gap-4 group/item cursor-default">
+                <div className="mt-1"><Star size={11} className="text-[#FF6B00]" /></div>
+                <p className="text-[10px] md:text-[12px] font-bold text-black/20 group-hover/item:text-black/50 tracking-tight">
+                  {feature}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
+          <motion.div variants={STAGGER_CONTAINER(0.05, 0.3)} className="hidden md:flex flex-wrap gap-2 md:gap-2 mt-4 md:mt-6">
+            {project.stack.map((tech) => (
+              <motion.div key={tech} variants={FADE_UP} className="bg-black/3 border border-black/5 rounded-lg px-2 md:px-3 py-1 flex items-center gap-2 group/pill cursor-default">
+                <span className="text-[8px] md:text-[9px] font-black uppercase tracking-wider text-black/40 group-hover/pill:text-black">{tech}</span>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+
+        <motion.div variants={FADE_UP} transition={{ delay: 0.4, ...TRANSITIONS.smooth }} className="lg:col-span-7 relative group px-6 sm:px-10 lg:pl-0 lg:pr-10">
+          <div className={`relative rounded-3xl md:rounded-[2.5rem] overflow-hidden bg-linear-to-br ${project.color} border border-white/10 h-[220px] xs:h-[260px] sm:h-[300px] md:h-[320px] mt-4 lg:mt-0`}>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-orange-500/5 blur-[120px] rounded-full pointer-events-none" />
+            <div className="relative z-10 h-full">
+              <div className="rounded-xl overflow-hidden shadow-2xl transform-gpu h-full">
+                <img src={project.mockups.desktop} className="w-full h-full object-cover" alt="Desktop" />
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </motion.div>
 
-      {/* Left Content */}
-      <div className="lg:col-span-5 flex flex-col pt-0 px-6 sm:px-10 relative z-10">
-        <div className="flex items-center gap-3 md:gap-4 mb-2">
-           <div className="w-6 md:w-8 h-[2px] bg-[#FF6B00]" />
-           <h3 className="text-[20px] xs:text-[24px] md:text-[34px] font-black tracking-tighter text-black">{project.title}</h3>
-        </div>
-        <p className="text-[11px] md:text-[14px] font-medium text-black/40 leading-relaxed mt-2 md:mt-4 line-clamp-3 md:line-clamp-none">
-          {project.description}
-        </p>
-        <div className="hidden md:flex flex-col gap-2 md:gap-4 mt-5 md:mt-6">
-          {project.features.slice(0, 3).map((feature: string, i: number) => (
-            <div key={i} className="flex gap-3 md:gap-4 group/item cursor-default">
-               <div className="mt-1"><Star size={11} className="text-[#FF6B00]" /></div>
-               <p className="text-[10px] md:text-[12px] font-bold text-black/20 group-hover/item:text-black/50 transition-colors tracking-tight">
-                  {feature}
-               </p>
-            </div>
-          ))}
-        </div>
-        <div className="hidden md:flex flex-wrap gap-2 md:gap-2.5 mt-6 md:mt-8">
-          {project.stack.map((tech: string) => (
-            <div key={tech} className="bg-black/[0.03] border border-black/5 rounded-lg px-2.5 md:px-4 py-1 flex items-center gap-2 group/pill cursor-default">
-               <span className="text-[8px] md:text-[10px] font-black uppercase tracking-wider text-black/40 group-hover/pill:text-black transition-colors">{tech}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Right Visuals */}
-      <div className="lg:col-span-7 relative group px-6 sm:px-10 lg:pl-0 lg:pr-10">
-        <motion.div 
-          initial={{ opacity: 0, y: 40, scale: 0.95 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          viewport={{ once: false }}
-          transition={{ duration: 1, delay: (index * 0.1) + 0.3, ease: [0.23, 1, 0.32, 1] }}
-          className={`relative rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden bg-gradient-to-br ${project.color} border border-white/10 h-[240px] xs:h-[280px] sm:h-[320px] md:h-[380px] mt-4 lg:mt-0`}
-        >
-           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-orange-500/5 blur-[120px] rounded-full pointer-events-none" />
-           <div className="relative z-10 h-full">
-              <div className="rounded-xl overflow-hidden shadow-2xl transform-gpu h-full">
-                 <img src={project.mockups.desktop} className="w-full h-full object-cover" alt="Desktop" />
-              </div>
-           </div>
-        </motion.div>
-      </div>
-
-      {/* Vertical Divider line (Hidden on Mobile) */}
       <div className="hidden lg:block absolute left-[41.666667%] top-10 bottom-10 pointer-events-none translate-x-[-50%] z-0">
-         <div className="w-[1px] h-full bg-black/[0.06]" />
+        <div className="w-px h-full bg-black/6" />
       </div>
     </motion.div>
   );
 };
+
+import { useRef } from 'react';
+import { useScroll, useTransform } from 'framer-motion';
 
 const Portfolio = () => {
   const targetRef = useRef<HTMLDivElement>(null);
@@ -148,11 +106,9 @@ const Portfolio = () => {
     target: targetRef,
   });
 
-  // Calculate transformation based on project count (4 projects)
-  // More translation needed on mobile as container is relatively wider
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-72%"]);
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-68%"]);
 
-  const projects = [
+  const projects: Project[] = [
     {
       id: "01",
       title: "LearnNexus",
@@ -212,35 +168,27 @@ const Portfolio = () => {
   ];
 
   return (
-    <section ref={targetRef} id="portfolio" className="relative h-[160vh] md:h-[180vh] lg:h-[280vh] bg-transparent text-black">
-      <div className="sticky top-0 h-fit min-h-screen md:min-h-screen flex flex-col items-center justify-start overflow-hidden pt-0">
-        
-        {/* Sticky Section Header */}
-        <div className="relative z-50 h-fit pointer-events-none px-6 md:px-12 lg:px-20 w-full text-left pt-6 md:pt-10 lg:pt-14">
-           <motion.div 
-             initial={{ opacity: 0, y: 30 }}
-             whileInView={{ opacity: 1, y: 0 }}
-             viewport={{ once: true }}
-             className="pointer-events-auto"
-           >
-             <p className="text-[8px] md:text-[9px] font-black uppercase tracking-[0.4em] md:tracking-[0.5em] text-black/30 mb-2">Crafting Modern Experiences</p>
-             <h2 className="text-[28px] mb-1 xs:text-[34px] sm:text-[38px] md:text-[54px] font-black tracking-tighter leading-none uppercase text-black">
-               Venture <span className="font-['Cormorant_Garamond'] italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] via-[#FDBA74] to-[#EB3678] tracking-tight">Showcase</span>
-             </h2>
-           </motion.div>
-        </div>
+    <section id="portfolio" ref={targetRef} className="relative h-[300vh] bg-transparent text-black">
+      <div className="sticky top-0 h-screen flex flex-col items-start justify-center overflow-hidden">
+        <motion.div 
+          variants={STAGGER_CONTAINER(0.1, 0.2)}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: false, amount: 0.2 }}
+          transition={TRANSITIONS.smooth}
+          className="px-6 md:px-12 lg:px-20 w-full text-left pt-2 md:pt-4 lg:pt-6 mb-6 md:mb-10"
+        >
+          <motion.p variants={FADE_UP} className="text-[8px] md:text-[9px] font-black uppercase tracking-[0.4em] md:tracking-[0.5em] text-black/30 mb-2">Crafting Modern Experiences</motion.p>
+          <motion.h2 variants={FADE_UP} className="text-[28px] mb-1 xs:text-[34px] sm:text-[38px] md:text-[54px] font-black tracking-tighter leading-none uppercase text-black">
+            Venture <span className="font-['Cormorant_Garamond'] italic font-normal text-transparent bg-clip-text bg-linear-to-r from-[#FF6B00] via-[#FDBA74] to-[#EB3678] tracking-tight">Showcase</span>
+          </motion.h2>
+        </motion.div>
 
-        {/* Horizontal Track Container */}
-        <div className="flex-1 flex items-start relative w-full pt-4 md:pt-12 pb-10">
-          <motion.div 
-            style={{ x }} 
-            className="flex gap-6 md:gap-12 px-5 md:px-12 lg:px-20 h-auto items-start"
-          >
-            {projects.map((project, i) => (
-              <ProjectCard key={project.id} project={project} index={i} />
-            ))}
-          </motion.div>
-        </div>
+        <motion.div style={{ x }} className="flex gap-6 md:gap-12 px-6 md:px-12 lg:px-20 items-start">
+          {projects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
+        </motion.div>
       </div>
     </section>
   );

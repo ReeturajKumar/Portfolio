@@ -2,14 +2,9 @@ import { lazy, Suspense } from 'react';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Hero from './components/sections/Hero';
+import BelowFoldFallback from './components/layout/BelowFoldFallback';
 
-const About = lazy(() => import('./components/sections/About'));
-const GlobalSection = lazy(() => import('./components/sections/GlobalSection'));
-const Portfolio = lazy(() => import('./components/sections/Portfolio'));
-const Journey = lazy(() => import('./components/sections/Journey'));
-const Skills = lazy(() => import('./components/sections/Skills'));
-const ProjectBanner = lazy(() => import('./components/sections/ProjectBanner'));
-const BuildingDaily = lazy(() => import('./components/sections/BuildingDaily'));
+const BelowFold = lazy(() => import('./BelowFold'));
 
 function App() {
   return (
@@ -17,18 +12,8 @@ function App() {
       <Navbar />
       <main>
         <section id="home"><Hero /></section>
-        <Suspense fallback={null}>
-          <section id="about">
-            <About />
-            <GlobalSection />
-          </section>
-          <Portfolio />
-          <ProjectBanner />
-          <section id="journey">
-            <Journey />
-            <BuildingDaily />
-          </section>
-          <section id="contact"><Skills /></section>
+        <Suspense fallback={<BelowFoldFallback />}>
+          <BelowFold />
         </Suspense>
       </main>
       <Footer />

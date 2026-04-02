@@ -9,7 +9,6 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          motion: ['framer-motion'],
           icons: ['lucide-react'],
         },
       },

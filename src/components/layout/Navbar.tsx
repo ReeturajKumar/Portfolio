@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
 const Navbar = () => {
@@ -14,13 +13,13 @@ const Navbar = () => {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      const navHeight = 64; // h-16 = 64px
+      const navHeight = 64;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - navHeight;
 
       window.scrollTo({
         top: offsetPosition,
-        behavior: 'smooth'
+        behavior: 'auto'
       });
       setIsMobileMenuOpen(false);
     }
@@ -34,12 +33,9 @@ const Navbar = () => {
     { label: 'Contact', id: 'contact' }
   ];
 
-  const MotionAnchor = motion.a;
-
   return (
     <>
-      <nav className="w-full bg-transparent backdrop-blur-2xl px-4 md:px-12 lg:px-20 py-3.5 flex items-center sticky top-0 z-[100] h-16">
-        {/* Left: Logo */}
+      <nav className="w-full bg-transparent backdrop-blur-2xl px-4 md:px-12 lg:px-20 py-3.5 flex items-center sticky top-0 z-100 h-16">
         <div className="flex-1 flex items-center justify-start">
           <a
             href="#home"
@@ -47,7 +43,7 @@ const Navbar = () => {
               e.preventDefault();
               scrollToSection('home');
             }}
-            className="flex items-center gap-1.5 cursor-pointer hover:opacity-70 transition-opacity"
+            className="flex items-center gap-1.5 cursor-pointer hover:opacity-70"
           >
             <svg width="34" height="28" viewBox="0 0 34 28" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="9" cy="14" r="8" fill="black"/>
@@ -57,7 +53,6 @@ const Navbar = () => {
           </a>
         </div>
 
-        {/* Center: Desktop Navigation Links */}
         <div className="hidden lg:flex items-center justify-center gap-8">
           {navLinks.map((link) => (
             <a
@@ -67,20 +62,19 @@ const Navbar = () => {
                 e.preventDefault();
                 scrollToSection(link.id);
               }}
-              className="text-[10px] font-black uppercase tracking-[0.2em] text-black hover:text-black transition-all cursor-pointer relative group"
+              className="text-[10px] font-black uppercase tracking-[0.2em] text-black cursor-pointer relative group"
             >
               {link.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-black transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-black group-hover:w-full" />
             </a>
           ))}
         </div>
 
-        {/* Right: Info, Status & Toggle */}
         <div className="flex-1 flex items-center justify-end gap-3 sm:gap-6">
           <a 
             href="/Reeturaj Kumar.pdf" 
             download="Reeturaj_Kumar_Resume.pdf"
-            className="hidden sm:flex items-center gap-2 px-4 py-1.5 rounded-full bg-black text-white hover:bg-black/80 transition-all duration-300 shadow-sm hover:shadow-md"
+            className="hidden sm:flex items-center gap-2 px-4 py-1.5 rounded-full bg-black text-white hover:bg-black/80 shadow-sm"
           >
             <span className="text-[9px] font-black uppercase tracking-wider">Resume</span>
           </a>
@@ -91,19 +85,20 @@ const Navbar = () => {
           </div>
           
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 md:w-9 md:h-9 overflow-hidden rounded-full border border-black/5 flex items-center justify-center bg-black/5 flex-shrink-0">
+            <div className="w-8 h-8 md:w-9 md:h-9 overflow-hidden rounded-full border border-black/5 flex items-center justify-center bg-black/5 shrink-0">
               <img 
                 src="/Navbar.png" 
                 alt="Reeturaj Kumar"
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                className="w-full h-full object-cover grayscale hover:grayscale-0"
               />
             </div>
 
-            {/* Mobile Menu Toggle */}
             <button 
+              type="button"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 rounded-full hover:bg-black/5 transition-colors z-[110]"
+              className="lg:hidden p-2 rounded-full hover:bg-black/5 z-110"
               aria-label="Toggle Menu"
+              aria-expanded={isMobileMenuOpen}
             >
               {isMobileMenuOpen ? (
                 <X className="w-5 h-5 text-black" />
@@ -115,59 +110,42 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-0 bg-white/95 backdrop-blur-2xl z-[90] lg:hidden flex flex-col pt-24 px-8"
-          >
-            <div className="space-y-8">
-              {navLinks.map((link, idx) => (
-                <MotionAnchor
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: idx * 0.1 }}
-                  key={link.label}
-                  href={`#${link.id}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection(link.id);
-                  }}
-                  className="block text-4xl font-black uppercase tracking-tighter text-black/20 hover:text-black transition-all text-left italic"
-                >
-                  {link.label}
-                </MotionAnchor>
-              ))}
-            </div>
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 bg-white/95 backdrop-blur-2xl z-90 lg:hidden flex flex-col pt-24 px-8">
+          <div className="space-y-8">
+            {navLinks.map((link) => (
+              <a
+                key={link.label}
+                href={`#${link.id}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection(link.id);
+                }}
+                className="block text-4xl font-black uppercase tracking-tighter text-black/20 hover:text-black text-left italic"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
 
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="mt-auto pb-12 space-y-6"
-            >
-              <div className="h-[1px] w-full bg-black/10" />
-              <div className="flex flex-col gap-4">
-                <a 
-                  href="/Reeturaj Kumar.pdf" 
-                  download="Reeturaj_Kumar_Resume.pdf"
-                  className="flex items-center justify-center gap-2 w-full py-4 rounded-full bg-black text-white text-[10px] font-black uppercase tracking-[0.2em]"
-                >
-                  Download Resume
-                </a>
-                <div className="text-center space-y-1">
-                  <p className="text-[10px] font-black uppercase text-black">Reeturaj Kumar</p>
-                  <p className="text-[10px] font-bold uppercase text-black/30 tracking-widest">{currentDate}</p>
-                </div>
+          <div className="mt-auto pb-12 space-y-6">
+            <div className="h-px w-full bg-black/10" />
+            <div className="flex flex-col gap-4">
+              <a 
+                href="/Reeturaj Kumar.pdf" 
+                download="Reeturaj_Kumar_Resume.pdf"
+                className="flex items-center justify-center gap-2 w-full py-4 rounded-full bg-black text-white text-[10px] font-black uppercase tracking-[0.2em]"
+              >
+                Download Resume
+              </a>
+              <div className="text-center space-y-1">
+                <p className="text-[10px] font-black uppercase text-black">Reeturaj Kumar</p>
+                <p className="text-[10px] font-bold uppercase text-black/30 tracking-widest">{currentDate}</p>
               </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

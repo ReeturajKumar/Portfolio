@@ -1,16 +1,17 @@
-import { motion } from 'framer-motion';
+import { motion } from "motion/react";
+import { FADE_LEFT, FADE_RIGHT, TRANSITIONS } from "../../constants/motion";
 
 const Hero = () => {
   return (
-    <section className="relative w-full bg-[#fffff] px-6 md:px-12 lg:px-16 xl:px-20 pt-2 pb-6 lg:pt-2 lg:pb-10 overflow-hidden">
+    <section className="relative w-full bg-brand-bg px-6 md:px-12 lg:px-16 xl:px-20 pt-2 pb-6 lg:pt-2 lg:pb-10 overflow-hidden">
       <div className="relative z-10 max-w-8xl mx-auto grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-[1.1fr_0.9fr] gap-10 items-center">
         
-        {/* LEFT CONTENT */}
         <motion.div 
-          initial={{ opacity: 0, x: -250 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: false, amount: 0.1 }}
-          transition={{ duration: 2.2, ease: [0.16, 1, 0.3, 1] }}
+          variants={FADE_RIGHT}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: false }}
+          transition={TRANSITIONS.smooth}
           className="flex flex-col z-10 order-2 lg:order-1 lg:pr-6"
         >
           <h1 className="text-[17vw] xs:text-[65px] sm:text-[90px] md:text-[110px] lg:text-[82px] xl:text-[150px] font-black leading-[0.85] md:leading-[0.8] tracking-[-0.05em] text-black lowercase mb-6 lg:mb-8">
@@ -23,7 +24,7 @@ const Hero = () => {
               {['git', 'in', 'js', 'ts'].map((id) => (
                 <div 
                   key={id} 
-                  className="w-10 h-10 md:w-11 md:h-11 rounded-full border border-black flex items-center justify-center text-[10px] md:text-[11px] font-black cursor-pointer hover:bg-black hover:text-white transition-all duration-300 uppercase"
+                  className="w-10 h-10 md:w-11 md:h-11 rounded-full border border-black flex items-center justify-center text-[10px] md:text-[11px] font-black cursor-pointer hover:bg-black hover:text-white uppercase"
                 >
                   {id}
                 </div>
@@ -56,12 +57,12 @@ const Hero = () => {
           </div>
         </motion.div>
 
-        {/* RIGHT VISUAL */}
         <motion.div 
-          initial={{ opacity: 0, x: 250 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: false, amount: 0.1 }}
-          transition={{ duration: 2.2, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
+          variants={FADE_LEFT}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: false }}
+          transition={TRANSITIONS.smooth}
           className="relative w-full flex justify-center order-1 lg:order-2"
         >
           <div className="relative w-full overflow-hidden bg-transparent">
@@ -69,14 +70,12 @@ const Hero = () => {
               src="/Reeturaj2.webp" 
               alt="Reeturaj Kumar" 
               className="w-full h-auto block"
+              fetchPriority="high"
+              decoding="async"
             />
           </div>
         </motion.div>
       </div>
-
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap');
-      `}</style>
     </section>
   );
 };
