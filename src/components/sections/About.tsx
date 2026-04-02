@@ -57,16 +57,20 @@ const About = () => {
             </motion.div>
 
             <motion.div variants={FADE_UP} className="relative mt-8 md:mt-auto mb-8 md:mb-10 w-full overflow-hidden">
-              <div ref={scrollRef} className="flex gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-4 text-white cursor-grab active:cursor-grabbing">
+              <div ref={scrollRef} className="flex gap-3 md:gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-4 text-white cursor-grab active:cursor-grabbing px-4">
                 {['/2.jpg', '/Reeturaj.png', '/1.jpg'].map((src, i) => (
                   <div 
                     key={i} 
-                    className={`flex-none w-[75%] md:w-[65%] snap-center rounded-3xl overflow-hidden border border-white/10 aspect-4/5 relative group/photo ${i === 0 ? '-rotate-3 mt-4 ml-6' : i === 1 ? 'rotate-0 mt-0' : 'rotate-3 mt-4 mr-6'}`}
+                    className={`flex-none w-[78%] md:w-[65%] snap-center rounded-3xl overflow-hidden border border-white/10 aspect-[3.6/5] md:aspect-4/5 relative group/photo transform-gpu transition-all duration-500 ${
+                      i === 0 ? '-rotate-3 mt-4 ml-2 md:ml-6' : 
+                      i === 1 ? 'rotate-0 mt-0 scale-105 md:scale-100 z-10' : 
+                      'rotate-3 mt-4 mr-2 md:mr-6'
+                    }`}
                   >
                     <img 
                       src={src} 
                       alt="Photo" 
-                      className={`w-full h-full object-cover ${i === 0 ? 'object-[center_5%]' : ''}`} 
+                      className={`w-full h-full object-cover transition-transform duration-700 group-hover/photo:scale-110 ${i === 1 ? 'object-top' : i === 0 ? 'object-center' : ''}`} 
                     />
                   </div>
                 ))}
