@@ -6,6 +6,7 @@ import learnnexusImg from '../../assets/projects/learnnexus.webp';
 import hiretrackImg from '../../assets/projects/hiretrack.webp';
 import tuneflowImg from '../../assets/projects/tuneflow.webp';
 import designStudioImg from '../../assets/projects/design_studio.webp';
+import beanImg from '../../assets/projects/Bean.webp';
 
 type Project = {
   id: string;
@@ -164,6 +165,20 @@ const Portfolio = () => {
       mockups: { mobile1: designStudioImg, mobile2: designStudioImg, desktop: designStudioImg },
       color: "from-orange-600/10 to-orange-900/5",
       link: "https://design-studio-lovat.vercel.app/"
+    },
+    {
+      id: "05",
+      title: "Bean Haven Café",
+      description: "A premium coffee shop brand experience featuring handcrafted brews and an elegant editorial-first digital home for artisanal caffeine lovers.",
+      features: [
+        "Artisanal product showcase with high-fidelity gourmet photography",
+        "Modern, interactive landing page with cinematic scroll animations",
+        "Fully responsive and optimized brand-first digital experience"
+      ],
+      stack: ["React", "Tailwind CSS", "Framer Motion", "GSAP"],
+      mockups: { mobile1: beanImg, mobile2: beanImg, desktop: beanImg },
+      color: "from-emerald-600/10 to-emerald-900/5",
+      link: "https://bean-haven-green.vercel.app/"
     }
   ];
 

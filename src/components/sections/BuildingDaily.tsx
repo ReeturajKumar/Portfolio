@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Music, Github as GhIcon, Github, Linkedin, X as XIcon } from 'lucide-react';
+import { Music, Github as GhIcon, Github, Linkedin} from 'lucide-react';
 import { motion } from 'motion/react';
 import { FADE_UP, STAGGER_CONTAINER } from "../../constants/motion";
 import { useLatestPortfolioCommit } from "../../hooks/useLatestPortfolioCommit";
