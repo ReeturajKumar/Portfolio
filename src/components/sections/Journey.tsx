@@ -121,7 +121,7 @@ const Journey = () => {
             <div className="flex items-center gap-8 md:gap-10 text-black/60">
               <div className="flex flex-col gap-0.5">
                 <span className="text-[20px] md:text-[24px] font-black italic tracking-tighter text-black">
-                  03
+                  04
                 </span>
                 <span className="text-[9px] font-black uppercase tracking-widest text-black/30">
                   Milestones

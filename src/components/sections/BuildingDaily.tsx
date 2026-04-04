@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Music, Github as GhIcon, Github, Linkedin} from 'lucide-react';
 import { motion } from 'motion/react';
 import { FADE_UP, STAGGER_CONTAINER } from "../../constants/motion";
-import { useLatestPortfolioCommit } from "../../hooks/useLatestPortfolioCommit";
+import { useLatestGitHubActivity } from "../../hooks/useLatestGitHubActivity";
 
 const GITHUB_HREF = "https://github.com/ReeturajKumar";
 const LINKEDIN_HREF = "https://www.linkedin.com/in/reeturaj-kumar-372963238/";
@@ -78,7 +78,7 @@ const SpotifyCardRadar = () => (
 );
 
 const GitHubActivityCard = () => {
-  const { state, user, repo } = useLatestPortfolioCommit();
+  const { state, user } = useLatestGitHubActivity();
 
   const footerSocial = [
     { Icon: Github, href: GITHUB_HREF, label: "GitHub" },
@@ -108,21 +108,23 @@ const GitHubActivityCard = () => {
           <p className="text-sm text-brand-gray leading-relaxed">
             Couldn&apos;t load activity ({state.message}).{' '}
             <a
-              href={`https://github.com/${user}/${repo}`}
+              href={`https://github.com/${user}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-white/80 underline underline-offset-2 hover:text-white"
             >
-              Open repo
+              Open profile
             </a>
           </p>
         </div>
       );
     }
 
-    if (state.status !== 'ready') {
+    if (state.status !== 'ready' || !state.commits[0]) {
       return null;
     }
+
+    const c = state.commits[0];
 
     return (
       <motion.div
@@ -131,29 +133,31 @@ const GitHubActivityCard = () => {
       >
         <motion.div variants={FADE_UP} className="flex items-center justify-between gap-3 flex-wrap">
           <span className="text-[11px] font-normal uppercase tracking-widest text-brand-gray">LATEST PUSH</span>
-          {state.badgeTime ? (
+          {c.badgeTime ? (
             <span className="inline-flex items-center gap-2 rounded-full bg-emerald-950/90 px-3 py-1.5 text-[11px] font-medium text-[#4ADE80]">
               <span className="h-2 w-2 shrink-0 rounded-full bg-[#4ADE80]" aria-hidden />
-              {state.badgeTime}
+              {c.badgeTime}
             </span>
           ) : null}
         </motion.div>
 
         <motion.a
           variants={FADE_UP}
-          href={state.commitUrl}
+          href={c.commitUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="group/msg block text-left"
         >
-          <p className="text-[18px] md:text-[22px] font-bold leading-snug tracking-tight text-white group-hover/msg:opacity-90 transition-opacity">
-            &quot;{state.message}&quot;
+          <p className="text-[18px] md:text-[22px] font-bold leading-snug tracking-tight text-white transition-opacity group-hover/msg:opacity-90">
+            &quot;{c.message}&quot;
           </p>
         </motion.a>
 
         <motion.p variants={FADE_UP} className="text-[11px] leading-relaxed">
           <span className="text-brand-gray">Repo: </span>
-          <span className="font-mono text-[#EF4444]">{state.repoLabel}</span>
+          <span className="font-mono text-[#EF4444]">{c.repoLabel}</span>
+          <span className="text-brand-gray"> · </span>
+          <span className="text-brand-gray">{c.sha}</span>
         </motion.p>
       </motion.div>
     );
